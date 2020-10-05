@@ -1,0 +1,31 @@
+import java.util.Properties;
+import java.io.InputStream;
+
+for (int i = 0; i < dataContext.getDataCount(); i++) {
+    InputStream is = dataContext.getStream(i);
+    Properties props = dataContext.getProperties(i);
+
+    // Retrieve the current property value which is Unixtimestamp
+    propValue = props.getProperty("document.dynamic.userdefined.DDP_latest_activity");
+
+    // turn to a number to do math and multiply by 1000 to get milliseconds as Peloton shaves 1000
+    def long latestUnixActivity = (Float.parseFloat(propValue)) *1000
+        def unixd = latestUnixActivity.toString()
+
+    //get current date unix'd    
+    Date currentDate = new Date();
+    def currentUnix = currentDate.getTime();
+        def current = currentUnix.toString()
+
+    //subtract the 2 dates and show results in mins
+    def difference_from_now = (currentUnix - latestUnixActivity) /1000/60
+    def diffString = difference_from_now.toString()
+
+
+    // Store the new property value
+    props.setProperty("document.dynamic.userdefined.DDP_timediff", diffString);
+    props.setProperty("document.dynamic.userdefined.DDP_current", current);
+    props.setProperty("document.dynamic.userdefined.DDP_unixd", unixd);
+
+    dataContext.storeStream(is, props);
+}
