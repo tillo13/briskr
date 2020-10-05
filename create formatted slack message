@@ -1,0 +1,98 @@
+var fixedTimediff = parseFloat(DDP_timediff).toFixed( 2 );
+var DDP_fixed_time_diff = fixedTimediff
+
+var mutualfollow = DDP_mutual_follow;
+
+if (mutualfollow == "following") {
+  //  block of code to be executed if the condition is true
+  DDP_mutual_follow = "Yep!";
+} else {
+  //  block of code to be executed if the condition is false
+  DDP_mutual_follow = "Nope!";
+}
+
+slack_out = "Head's up! "
++ "`"
++ DDP_current_username
++ "`"    
++ " just started a ride on Peloton! :bike:"
++ "\n"
++ "*Ride number for user*: "
++ "`"
++ DDP_pedaling_workouts
++ "`"
++ "\n"
++ "*Total :peloton: workout number for user*: "
++ "`"
++ DDP_current_workout_number
++ "`"
++ "\n"
++ "*Mutually following each other?*: "
++ "`"
++ DDP_mutual_follow
++ "`"
++ "\n"
++ "*Started @*: "
++ "`"
++ DDP_unix_to_utc
++ " UTC"
++ "`"
++ " (_~"
++ fixedTimediff
++ " minutes ago..._)"
++ "\n"
++ "*Ride Name*: "
++ "`"  
++ DDP_class_name
++ "`"  
++ "\n"
++ "*Instructor*: "
++ "`"  
++ DDP_class_instructor_name
++ "`"  
++ "\n"
++ "*Class Difficulty*: "
++ "`"  
++ DDP_class_difficulty_score
++ "`" 
++ " (_"
++ DDP_class_difficulty_level
++ "_)"
++ "\n"
++ "*Class Rating*: "
++ "`"  
++ DDP_class_rating
++ "`"  
++ "\n"
++ "*Lifetime Class Ride Count*: "
++ "`"  
++ DDP_class_total_workouts
++ "`"  
++ "\n"
++ "*Lifetime Class Rating Count*: "
++ "`"  
++ DDP_class_rating_count
++ "`"  
++ "\n"
++ "*Sample Musical Artist Played*: "
++ "`"  
++ DDP_example_song_artist
++ "`"  
++ "\n"
++ "*Original Air Date*: "
++ "`"  
++ DDP_class_original_air_date
++ " UTC"
++ "`"  
++ "\n"
++ "*Bris.kr profile (if available)*: "
++ "`"
++ "https://bris.kr/?u="
++ DDP_current_username
++ "`"
++ "\n"
++ "*Class image*: "
++ "\n"
++ DDP_class_image_url
++ "\n"
++ "- - - - - - - - - - - - -"
