@@ -1,0 +1,34 @@
+var str = state.getStringValue("{![username]}");
+var str2 = state.getStringValue("{!base64]}");
+var str3 = state.getNumberValue("{![guid]}");
+
+String.prototype.hashCode = function() {
+    var hash = 0;
+    if (this.length === 0) {
+        return hash;
+    }
+    for (var i = 0; i < this.length; i++) {
+        var char = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+};
+
+hash = str.hashCode();
+hash2 = str2.hashCode();
+hash3 = str3.hashCode();
+
+numhash1_raw = Number(hash);
+numhash2_raw = Number(hash2);
+
+numhash1 = Math.abs(hash);
+numhash2 = Math.abs(hash2);
+numhash3 = Math.abs(hash3);
+
+hashtotal_number = (numhash1 + numhash2 + numhash3);
+
+//save new hash as a string: 
+hashtotal_string = hashtotal_number.toString();
+
+state.setNumberValue("{![hash]}", hashtotal_number);
